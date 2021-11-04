@@ -22,6 +22,8 @@ class MapViewController: UIViewController {
         configureLocationManager()
     }
     
+    //MARK: - Functions
+    
     func configureMap() {
         let coordinate = CLLocationCoordinate2D(latitude: 59.939095, longitude: 30.315868)
         let camera = GMSCameraPosition(target: coordinate, zoom: 17)
