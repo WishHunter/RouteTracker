@@ -14,6 +14,7 @@
 		CEAD9E9027332790003B90C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAD9E8F27332790003B90C8 /* Assets.xcassets */; };
 		CEAD9E9327332790003B90C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEAD9E9127332790003B90C8 /* LaunchScreen.storyboard */; };
 		CEAD9E9A27332B7B003B90C8 /* Pods_RouteTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56D51A3FFA9AF5E975908B11 /* Pods_RouteTracker.framework */; };
+		CEF100542738343400B917BC /* CoordinateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF100532738343400B917BC /* CoordinateEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		CEAD9E8F27332790003B90C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEAD9E9227332790003B90C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEAD9E9427332790003B90C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEF100532738343400B917BC /* CoordinateEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateEntity.swift; sourceTree = "<group>"; };
 		F9FB5059CDDBA84A48B147B9 /* Pods-RouteTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.debug.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 				CEAD9E8F27332790003B90C8 /* Assets.xcassets */,
 				CEAD9E9127332790003B90C8 /* LaunchScreen.storyboard */,
 				CEAD9E9427332790003B90C8 /* Info.plist */,
+				CEF100532738343400B917BC /* CoordinateEntity.swift */,
 			);
 			path = RouteTracker;
 			sourceTree = "<group>";
@@ -103,6 +106,7 @@
 				CEAD9E802733278E003B90C8 /* Frameworks */,
 				CEAD9E812733278E003B90C8 /* Resources */,
 				F3A8B228CF77265D9300DC95 /* [CP] Copy Pods Resources */,
+				07AD4B4EAD500505D39468F5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -160,6 +164,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		07AD4B4EAD500505D39468F5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RouteTracker/Pods-RouteTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RouteTracker/Pods-RouteTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RouteTracker/Pods-RouteTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		EF66A6F954884BA4049080FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,6 +229,7 @@
 			files = (
 				CEAD9E8B2733278E003B90C8 /* MapViewController.swift in Sources */,
 				CEAD9E872733278E003B90C8 /* AppDelegate.swift in Sources */,
+				CEF100542738343400B917BC /* CoordinateEntity.swift in Sources */,
 				CEAD9E892733278E003B90C8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +384,8 @@
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RouteTracker/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "For example";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For example";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -393,6 +417,8 @@
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RouteTracker/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "For example";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For example";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

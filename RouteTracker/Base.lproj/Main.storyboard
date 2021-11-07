@@ -36,13 +36,64 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgw-G8-pkM">
+                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6Z-ka-Osg">
+                                        <rect key="frame" x="10" y="12.5" width="111.5" height="35.5"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="New track">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="startTrack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fsU-Gm-8MW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLB-cJ-FeU">
+                                        <rect key="frame" x="131.5" y="12.5" width="124" height="35.5"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Finish track">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="stopTrack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OLF-Aq-Kzd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTs-Kb-FWr">
+                                        <rect key="frame" x="294" y="12.5" width="110" height="35.5"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Last track">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="lastTrack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QiU-fd-6t8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.95945797871578997" green="0.98754349854079626" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="B6Z-ka-Osg" firstAttribute="centerY" secondItem="dgw-G8-pkM" secondAttribute="centerY" id="0be-Xh-Ufj"/>
+                                    <constraint firstItem="YLB-cJ-FeU" firstAttribute="centerY" secondItem="dgw-G8-pkM" secondAttribute="centerY" id="89f-pQ-SCd"/>
+                                    <constraint firstAttribute="trailing" secondItem="PTs-Kb-FWr" secondAttribute="trailing" constant="10" id="JY8-Of-eUU"/>
+                                    <constraint firstAttribute="height" constant="60" id="Nfu-v6-3ZI"/>
+                                    <constraint firstItem="YLB-cJ-FeU" firstAttribute="leading" secondItem="B6Z-ka-Osg" secondAttribute="trailing" priority="999" constant="10" id="T2b-UP-Y2H"/>
+                                    <constraint firstItem="B6Z-ka-Osg" firstAttribute="leading" secondItem="dgw-G8-pkM" secondAttribute="leading" constant="10" id="jke-5T-ED4"/>
+                                    <constraint firstItem="PTs-Kb-FWr" firstAttribute="centerY" secondItem="dgw-G8-pkM" secondAttribute="centerY" id="s9R-Ba-DMh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vCj-M2-4qu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DiK-ay-99F"/>
+                            <constraint firstItem="dgw-G8-pkM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Dm3-cq-9Zg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dgw-G8-pkM" secondAttribute="trailing" id="pOr-VF-v4A"/>
                             <constraint firstItem="vCj-M2-4qu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="uWG-PY-p1x"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vCj-M2-4qu" secondAttribute="bottom" id="vWm-Oq-ek8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dgw-G8-pkM" secondAttribute="bottom" id="wFr-e7-KT5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vCj-M2-4qu" secondAttribute="trailing" id="yFa-2f-xlN"/>
                         </constraints>
                     </view>
@@ -77,10 +128,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-304" y="19"/>
+            <point key="canvasLocation" x="-304.34782608695656" y="18.75"/>
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
