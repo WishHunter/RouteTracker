@@ -11,10 +11,25 @@ import GoogleMaps
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GMSServices.provideAPIKey("AIzaSyA-Ph65XVA_gqT3JA0C4Tf9CwaY8GfDLXs")
+        
+        let controller: UIViewController
+        
+        if UserDefaults.standard.bool(forKey: "isLogin") {
+            controller = UIStoryboard(name: "Main", bundle: nil)
+                .instantiateViewController(MapViewController.self)
+        } else {
+            controller = UIStoryboard(name: "AuthStoryboard", bundle: nil)
+                .instantiateViewController(AuthViewController.self)
+        }
+        
+        window = UIWindow()
+        window?.rootViewController = UINavigationController(rootViewController: controller)
+        
+        window?.makeKeyAndVisible()
         
         return true
     }

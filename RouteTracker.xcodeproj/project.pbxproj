@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0F5CE9273C269F00400389 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0F5CE8273C269F00400389 /* AuthStoryboard.storyboard */; };
+		CE0F5CEB273C275200400389 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F5CEA273C275200400389 /* AuthViewController.swift */; };
+		CE0F5CED273C279000400389 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F5CEC273C279000400389 /* RegisterViewController.swift */; };
+		CEA09E9E2741683500049B43 /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA09E9D2741683500049B43 /* StoryboardIdentifiable.swift */; };
+		CEA09EA12741686C00049B43 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA09EA02741686C00049B43 /* BaseRouter.swift */; };
+		CEA09EA327416ABD00049B43 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA09EA227416ABD00049B43 /* LoginRouter.swift */; };
+		CEA09EA527416BAF00049B43 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA09EA427416BAF00049B43 /* MainRouter.swift */; };
+		CEA09EA8274170FA00049B43 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA09EA7274170FA00049B43 /* UserEntity.swift */; };
 		CEAD9E872733278E003B90C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD9E862733278E003B90C8 /* AppDelegate.swift */; };
 		CEAD9E892733278E003B90C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD9E882733278E003B90C8 /* SceneDelegate.swift */; };
 		CEAD9E8B2733278E003B90C8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD9E8A2733278E003B90C8 /* MapViewController.swift */; };
@@ -20,6 +28,14 @@
 /* Begin PBXFileReference section */
 		56D51A3FFA9AF5E975908B11 /* Pods_RouteTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouteTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BDC3314C116CDBCD73606B1 /* Pods-RouteTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.release.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.release.xcconfig"; sourceTree = "<group>"; };
+		CE0F5CE8273C269F00400389 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
+		CE0F5CEA273C275200400389 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		CE0F5CEC273C279000400389 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		CEA09E9D2741683500049B43 /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
+		CEA09EA02741686C00049B43 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		CEA09EA227416ABD00049B43 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		CEA09EA427416BAF00049B43 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		CEA09EA7274170FA00049B43 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		CEAD9E832733278E003B90C8 /* RouteTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAD9E862733278E003B90C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEAD9E882733278E003B90C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +77,52 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE0F5CE7273C266400400389 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				CE0F5CE8273C269F00400389 /* AuthStoryboard.storyboard */,
+				CE0F5CEA273C275200400389 /* AuthViewController.swift */,
+				CE0F5CEC273C279000400389 /* RegisterViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		CEA09E9C2741681100049B43 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CEA09E9D2741683500049B43 /* StoryboardIdentifiable.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CEA09E9F2741685C00049B43 /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				CEA09EA02741686C00049B43 /* BaseRouter.swift */,
+				CEA09EA227416ABD00049B43 /* LoginRouter.swift */,
+				CEA09EA427416BAF00049B43 /* MainRouter.swift */,
+			);
+			path = Routers;
+			sourceTree = "<group>";
+		};
+		CEA09EA62741706200049B43 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				CEF100532738343400B917BC /* CoordinateEntity.swift */,
+				CEA09EA7274170FA00049B43 /* UserEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		CEA09EA927417B3F00049B43 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD9E8C2733278E003B90C8 /* Main.storyboard */,
+				CEAD9E8A2733278E003B90C8 /* MapViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		CEAD9E7A2733278E003B90C8 = {
 			isa = PBXGroup;
 			children = (
@@ -82,14 +144,16 @@
 		CEAD9E852733278E003B90C8 /* RouteTracker */ = {
 			isa = PBXGroup;
 			children = (
+				CEA09EA927417B3F00049B43 /* Main */,
+				CEA09EA62741706200049B43 /* Entity */,
+				CEA09E9F2741685C00049B43 /* Routers */,
+				CEA09E9C2741681100049B43 /* Helpers */,
+				CE0F5CE7273C266400400389 /* Auth */,
 				CEAD9E862733278E003B90C8 /* AppDelegate.swift */,
 				CEAD9E882733278E003B90C8 /* SceneDelegate.swift */,
-				CEAD9E8A2733278E003B90C8 /* MapViewController.swift */,
-				CEAD9E8C2733278E003B90C8 /* Main.storyboard */,
 				CEAD9E8F27332790003B90C8 /* Assets.xcassets */,
 				CEAD9E9127332790003B90C8 /* LaunchScreen.storyboard */,
 				CEAD9E9427332790003B90C8 /* Info.plist */,
-				CEF100532738343400B917BC /* CoordinateEntity.swift */,
 			);
 			path = RouteTracker;
 			sourceTree = "<group>";
@@ -158,6 +222,7 @@
 				CEAD9E9327332790003B90C8 /* LaunchScreen.storyboard in Resources */,
 				CEAD9E9027332790003B90C8 /* Assets.xcassets in Resources */,
 				CEAD9E8E2733278E003B90C8 /* Main.storyboard in Resources */,
+				CE0F5CE9273C269F00400389 /* AuthStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,10 +292,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEA09EA8274170FA00049B43 /* UserEntity.swift in Sources */,
+				CEA09E9E2741683500049B43 /* StoryboardIdentifiable.swift in Sources */,
 				CEAD9E8B2733278E003B90C8 /* MapViewController.swift in Sources */,
 				CEAD9E872733278E003B90C8 /* AppDelegate.swift in Sources */,
+				CE0F5CEB273C275200400389 /* AuthViewController.swift in Sources */,
+				CE0F5CED273C279000400389 /* RegisterViewController.swift in Sources */,
+				CEA09EA527416BAF00049B43 /* MainRouter.swift in Sources */,
+				CEA09EA327416ABD00049B43 /* LoginRouter.swift in Sources */,
 				CEF100542738343400B917BC /* CoordinateEntity.swift in Sources */,
 				CEAD9E892733278E003B90C8 /* SceneDelegate.swift in Sources */,
+				CEA09EA12741686C00049B43 /* BaseRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,7 +460,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For example";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -421,7 +492,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For example";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
