@@ -23,6 +23,7 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var markerButton: UIButton!
+    @IBOutlet weak var router: MainRouter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -172,6 +173,11 @@ class MapViewController: UIViewController {
         } else {
             showLastTrack()
         }
+    }
+    
+    @IBAction func logOut(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "isLogin")
+        router.toAuth()
     }
 }
 
