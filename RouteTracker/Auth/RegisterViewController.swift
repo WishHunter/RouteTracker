@@ -14,8 +14,38 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var router: LoginRouter!
 
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.initController()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(showPrivateMode(_:)), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hidePrivateMode(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+    }
+    
+    //MARK: - Functions
+    func initController() {
+        loginTextField.autocorrectionType = .no
+        passwordTextField.autocorrectionType = .no
+    }
+    
+    @objc func showPrivateMode(_ notification: Notification) {
+        loginTextField.layer.opacity = 0
+        passwordTextField.layer.opacity = 0
+    }
+    
+    @objc func hidePrivateMode(_ notification: Notification) {
+        loginTextField.layer.opacity = 1
+        passwordTextField.layer.opacity = 1
     }
     
     func findSimilarUser(login: String) -> Bool {
@@ -64,6 +94,7 @@ class RegisterViewController: UIViewController {
         return isEdit
     }
     
+    //MARK: - Actions
     @IBAction func registrationAction(_ sender: Any) {
         guard let login = loginTextField.text,
               let password = passwordTextField.text
