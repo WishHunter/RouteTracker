@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0E8DA7274A50D8009BC6D6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E8DA6274A50D8009BC6D6 /* LocationManager.swift */; };
 		CE0F5CE9273C269F00400389 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0F5CE8273C269F00400389 /* AuthStoryboard.storyboard */; };
 		CE0F5CEB273C275200400389 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F5CEA273C275200400389 /* AuthViewController.swift */; };
 		CE0F5CED273C279000400389 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F5CEC273C279000400389 /* RegisterViewController.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		56D51A3FFA9AF5E975908B11 /* Pods_RouteTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouteTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BDC3314C116CDBCD73606B1 /* Pods-RouteTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouteTracker.release.xcconfig"; path = "Target Support Files/Pods-RouteTracker/Pods-RouteTracker.release.xcconfig"; sourceTree = "<group>"; };
+		CE0E8DA6274A50D8009BC6D6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		CE0F5CE8273C269F00400389 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
 		CE0F5CEA273C275200400389 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CE0F5CEC273C279000400389 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				CEAD9E8C2733278E003B90C8 /* Main.storyboard */,
 				CEAD9E8A2733278E003B90C8 /* MapViewController.swift */,
+				CE0E8DA6274A50D8009BC6D6 /* LocationManager.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				CE0F5CED273C279000400389 /* RegisterViewController.swift in Sources */,
 				CEA09EA527416BAF00049B43 /* MainRouter.swift in Sources */,
 				CEA09EA327416ABD00049B43 /* LoginRouter.swift in Sources */,
+				CE0E8DA7274A50D8009BC6D6 /* LocationManager.swift in Sources */,
 				CEF100542738343400B917BC /* CoordinateEntity.swift in Sources */,
 				CEAD9E892733278E003B90C8 /* SceneDelegate.swift in Sources */,
 				CEA09EA12741686C00049B43 /* BaseRouter.swift in Sources */,

@@ -73,6 +73,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="FSN-KO-Dai" id="v2G-e5-jjn"/>
                         <outlet property="loginTextField" destination="KnL-2g-NxG" id="Xri-Nv-kqv"/>
                         <outlet property="passwordTextField" destination="QIf-nm-REm" id="xp3-Nv-0sR"/>
                         <outlet property="router" destination="0bm-R3-hrZ" id="h0p-Mt-hAR"/>
