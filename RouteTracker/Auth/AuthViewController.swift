@@ -7,11 +7,14 @@
 
 import UIKit
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 class AuthViewController: UIViewController {
     
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var router: LoginRouter!
     
     
@@ -37,6 +40,8 @@ class AuthViewController: UIViewController {
     func initController() {
         loginTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
+        loginButton.isEnabled = false
+        configureLoginBindings()
     }
     
     @objc func showPrivateMode(_ notification: Notification) {
@@ -90,5 +95,17 @@ class AuthViewController: UIViewController {
         
         UserDefaults.standard.set(true, forKey: "isLogin")
         router.toMain()
+    }
+    
+    //MARK: - Bindings
+    func configureLoginBindings() {
+        Observable
+            .combineLatest(loginTextField.rx.text, passwordTextField.rx.text)
+            .map { login, password in
+                return !(login ?? "").isEmpty && (password ?? "").count >= 6
+            }
+            .bind { [weak loginButton] inputFilled in
+                loginButton?.isEnabled = inputFilled
+            }
     }
 }

@@ -11,7 +11,9 @@ import CoreLocation
 import RealmSwift
 
 class MapViewController: UIViewController {
-    var locationManager: CLLocationManager?
+    var usselesExampleVariable = ""
+    
+    var locationManager = LocationManager.instance
     var route: GMSPolyline? {
         didSet {
             route?.strokeColor = .yellow
@@ -24,7 +26,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var markerButton: UIButton!
     @IBOutlet weak var router: MainRouter!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureMap()
@@ -42,12 +44,18 @@ class MapViewController: UIViewController {
     }
     
     func configureLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.pausesLocationUpdatesAutomatically = false
-        locationManager?.startMonitoringSignificantLocationChanges()
-        locationManager?.requestAlwaysAuthorization()
+        locationManager
+            .location
+            .asObservable()
+            .bind { [weak self] location in
+                guard let location = location else { return }
+                self?.routePath?.add(location.coordinate)
+                self?.route?.path = self?.routePath
+                
+                let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
+                self?.mapView.animate(to: position)
+                
+            }
     }
     
     func addMarker(coordinate: CLLocationCoordinate2D) {
@@ -90,7 +98,7 @@ class MapViewController: UIViewController {
         route = GMSPolyline()
         routePath = GMSMutablePath()
         route?.map = mapView
-        locationManager?.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
         isActiveTrack = true
     }
     
@@ -100,7 +108,7 @@ class MapViewController: UIViewController {
                                       preferredStyle: .alert)
         let ok = UIAlertAction(title: "Yes",
                                style: .default) { [weak self] action in
-            self?.locationManager?.stopUpdatingLocation()
+            self?.locationManager.stopUpdatingLocation()
             self?.isActiveTrack = false
             self?.showLastTrack()
         }
@@ -133,10 +141,10 @@ class MapViewController: UIViewController {
             
             route?.path = routePath
             route?.map = mapView
-                        
+            
             guard let firstDot = coordinates.first,
                   let lastDot = coordinates.last else { return }
-                        
+            
             let firstCoordinate = CLLocationCoordinate2D(latitude: firstDot.latitude, longitude: firstDot.longitude)
             let lastCoordinate = CLLocationCoordinate2D(latitude: lastDot.latitude, longitude: lastDot.longitude)
             let bounds = GMSCoordinateBounds(coordinate: firstCoordinate, coordinate: lastCoordinate)
@@ -154,7 +162,7 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func currentLocation(_ sender: Any) {
-        locationManager?.requestLocation()
+        locationManager.requestLocation()
     }
     
     @IBAction func startTrack(_ sender: Any) {
@@ -163,7 +171,7 @@ class MapViewController: UIViewController {
     
     @IBAction func stopTrack(_ sender: Any) {
         writeTrack()
-        locationManager?.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
         isActiveTrack = false
     }
     
@@ -183,220 +191,205 @@ class MapViewController: UIViewController {
 
 extension MapViewController {
     func configureMapStyle() {
-            let style = "[" +
-                "  {" +
-                "    \"featureType\": \"all\"," +
-                "    \"elementType\": \"geometry\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#242f3e\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"all\"," +
-                "    \"elementType\": \"labels.text.stroke\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"lightness\": -80" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"administrative\"," +
-                "    \"elementType\": \"labels.text.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#746855\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"administrative.locality\"," +
-                "    \"elementType\": \"labels.text.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#d59563\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"poi\"," +
-                "    \"elementType\": \"labels.text.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#d59563\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"poi.park\"," +
-                "    \"elementType\": \"geometry\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#263c3f\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"poi.park\"," +
-                "    \"elementType\": \"labels.text.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#6b9a76\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"road\"," +
-                "    \"elementType\": \"geometry.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#2b3544\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"road\"," +
-                "    \"elementType\": \"labels.text.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#9ca5b3\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"road.arterial\"," +
-                "    \"elementType\": \"geometry.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#38414e\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"road.arterial\"," +
-                "    \"elementType\": \"geometry.stroke\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#212a37\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"road.highway\"," +
-                "    \"elementType\": \"geometry.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#746855\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"road.highway\"," +
-                "    \"elementType\": \"geometry.stroke\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#1f2835\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"road.highway\"," +
-                "    \"elementType\": \"labels.text.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#f3d19c\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"road.local\"," +
-                "    \"elementType\": \"geometry.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#38414e\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"road.local\"," +
-                "    \"elementType\": \"geometry.stroke\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#212a37\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"transit\"," +
-                "    \"elementType\": \"geometry\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#2f3948\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"transit.station\"," +
-                "    \"elementType\": \"labels.text.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#d59563\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"water\"," +
-                "    \"elementType\": \"geometry\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#17263c\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"water\"," +
-                "    \"elementType\": \"labels.text.fill\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"color\": \"#515c6d\"" +
-                "      }" +
-                "    ]" +
-                "  }," +
-                "  {" +
-                "    \"featureType\": \"water\"," +
-                "    \"elementType\": \"labels.text.stroke\"," +
-                "    \"stylers\": [" +
-                "      {" +
-                "        \"lightness\": -20" +
-                "      }" +
-                "    ]" +
-                "  }" +
-            "]"
-            do {
-                mapView.mapStyle = try GMSMapStyle(jsonString: style)
-            } catch {
-                print(error)
-            }
-            
+        let style = "[" +
+        "  {" +
+        "    \"featureType\": \"all\"," +
+        "    \"elementType\": \"geometry\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#242f3e\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"all\"," +
+        "    \"elementType\": \"labels.text.stroke\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"lightness\": -80" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"administrative\"," +
+        "    \"elementType\": \"labels.text.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#746855\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"administrative.locality\"," +
+        "    \"elementType\": \"labels.text.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#d59563\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"poi\"," +
+        "    \"elementType\": \"labels.text.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#d59563\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"poi.park\"," +
+        "    \"elementType\": \"geometry\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#263c3f\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"poi.park\"," +
+        "    \"elementType\": \"labels.text.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#6b9a76\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"road\"," +
+        "    \"elementType\": \"geometry.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#2b3544\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"road\"," +
+        "    \"elementType\": \"labels.text.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#9ca5b3\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"road.arterial\"," +
+        "    \"elementType\": \"geometry.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#38414e\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"road.arterial\"," +
+        "    \"elementType\": \"geometry.stroke\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#212a37\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"road.highway\"," +
+        "    \"elementType\": \"geometry.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#746855\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"road.highway\"," +
+        "    \"elementType\": \"geometry.stroke\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#1f2835\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"road.highway\"," +
+        "    \"elementType\": \"labels.text.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#f3d19c\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"road.local\"," +
+        "    \"elementType\": \"geometry.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#38414e\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"road.local\"," +
+        "    \"elementType\": \"geometry.stroke\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#212a37\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"transit\"," +
+        "    \"elementType\": \"geometry\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#2f3948\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"transit.station\"," +
+        "    \"elementType\": \"labels.text.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#d59563\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"water\"," +
+        "    \"elementType\": \"geometry\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#17263c\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"water\"," +
+        "    \"elementType\": \"labels.text.fill\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"color\": \"#515c6d\"" +
+        "      }" +
+        "    ]" +
+        "  }," +
+        "  {" +
+        "    \"featureType\": \"water\"," +
+        "    \"elementType\": \"labels.text.stroke\"," +
+        "    \"stylers\": [" +
+        "      {" +
+        "        \"lightness\": -20" +
+        "      }" +
+        "    ]" +
+        "  }" +
+        "]"
+        do {
+            mapView.mapStyle = try GMSMapStyle(jsonString: style)
+        } catch {
+            print(error)
         }
+        
+    }
 }
 
-extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        guard let coordinate = locations.last?.coordinate, isActiveTrack else { return }
-        routePath?.add(coordinate)
-        route?.path = routePath
-        
-        let camera = GMSCameraPosition(target: coordinate, zoom: 17)
-        mapView.animate(to: camera)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
-}
 
 
